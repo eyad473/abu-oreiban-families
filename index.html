@@ -3,183 +3,2084 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#123b35">
-  <title>بوابة أهالي مخيم أبو عريبان</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102b46">
+  <meta name="description" content="بوابة عائلات مخيم أبو عريبان">
+  <title>بوابة عائلات مخيم أبو عريبان</title>
+
   <style>
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#f3f6f5;color:#20312e;line-height:1.8}
-    header{background:#123b35;color:white;padding:26px 18px;text-align:center}
-    header h1{margin:0;font-size:25px}
-    header p{margin:6px 0 0;color:#d6e8e1}
-    main{max-width:760px;margin:22px auto;padding:0 14px}
-    .card{background:white;border:1px solid #e0e9e5;border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 5px 20px #163c3510}
-    h2{font-size:19px;margin:0 0 12px;color:#174d42}
-    label{display:block;font-weight:bold;margin:12px 0 5px}
-    input,select,textarea{width:100%;padding:12px;border:1px solid #ccd9d4;border-radius:10px;font:inherit;background:white}
-    button{border:0;border-radius:10px;padding:12px 18px;font:inherit;font-weight:bold;cursor:pointer}
-    .primary{background:#176b55;color:white;width:100%;margin-top:16px}
-    .secondary{background:#e8f1ed;color:#174d42}
-    .notice{background:#fff7df;border:1px solid #f0df9e;padding:12px;border-radius:10px;font-size:14px}
-    .hidden{display:none}
-    .muted{color:#687a74;font-size:14px}
-    .item{border:1px solid #e0e9e5;padding:12px;border-radius:10px;margin-top:10px}
-    footer{text-align:center;color:#6e7f79;font-size:13px;padding:20px}
-    .tag{display:inline-block;background:#e4f3eb;color:#176b55;padding:2px 9px;border-radius:20px;font-size:12px}
+    :root {
+      --navy: #102b46;
+      --navy-light: #193e60;
+      --blue: #2563eb;
+      --blue-soft: #eaf2ff;
+      --teal: #0f766e;
+      --green: #15803d;
+      --orange: #b45309;
+      --red: #b91c1c;
+      --bg: #f3f6fa;
+      --surface: #ffffff;
+      --text: #172b42;
+      --muted: #718096;
+      --border: #e1e8f0;
+      --radius: 18px;
+      --shadow: 0 8px 28px rgba(16, 43, 70, 0.07);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Tahoma, Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+      outline: 3px solid #93c5fd;
+      outline-offset: 2px;
+    }
+
+    .app-shell {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--navy);
+      color: white;
+      padding: 24px 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 4px 8px 24px;
+      border-bottom: 1px solid rgba(255,255,255,.15);
+      margin-bottom: 22px;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      flex-shrink: 0;
+      border-radius: 14px;
+      background: rgba(255,255,255,.12);
+      font-size: 25px;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .brand p {
+      margin: 3px 0 0;
+      color: #c7d6e7;
+      font-size: 11px;
+    }
+
+    .nav-label {
+      margin: 20px 10px 8px;
+      color: #9fb4cb;
+      font-size: 11px;
+    }
+
+    .nav-menu {
+      display: grid;
+      gap: 6px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      border: 0;
+      border-radius: 11px;
+      padding: 11px 12px;
+      text-align: right;
+      color: #d8e4f0;
+      background: transparent;
+      transition: background .2s, color .2s;
+    }
+
+    .nav-item:hover {
+      background: rgba(255,255,255,.08);
+      color: white;
+    }
+
+    .nav-item.active {
+      background: #ffffff;
+      color: var(--navy);
+      font-weight: bold;
+    }
+
+    .nav-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 25px;
+      font-size: 17px;
+    }
+
+    .sidebar-footer {
+      margin-top: 30px;
+      padding: 14px 10px;
+      border-top: 1px solid rgba(255,255,255,.15);
+      color: #c7d6e7;
+      font-size: 11px;
+    }
+
+    .main-area {
+      min-width: 0;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 28px;
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .topbar-title h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .topbar-title p {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .menu-toggle {
+      display: none;
+      border: 1px solid var(--border);
+      background: white;
+      border-radius: 10px;
+      padding: 8px 12px;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      color: var(--green);
+      background: #e9f8ee;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .avatar {
+      display: grid;
+      place-items: center;
+      width: 39px;
+      height: 39px;
+      border-radius: 50%;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-weight: bold;
+    }
+
+    .content {
+      width: 100%;
+      max-width: 1500px;
+      margin: auto;
+      padding: 28px;
+    }
+
+    .page {
+      display: none;
+      animation: fade-in .25s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .page-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .page-heading h2 {
+      margin: 0;
+      font-size: 23px;
+    }
+
+    .page-heading p {
+      margin: 6px 0 0;
+      color: var(--muted);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 40px;
+      padding: 9px 15px;
+      border: 1px solid transparent;
+      border-radius: 11px;
+      font-weight: bold;
+      transition: transform .15s, background .15s;
+    }
+
+    .btn:active {
+      transform: scale(.98);
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-secondary {
+      color: var(--navy);
+      background: white;
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: #f8fafc;
+    }
+
+    .btn-danger {
+      color: white;
+      background: var(--red);
+    }
+
+    .btn-small {
+      min-height: 32px;
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-bottom: 22px;
+    }
+
+    .stat-card {
+      position: relative;
+      overflow: hidden;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card::after {
+      content: "";
+      position: absolute;
+      left: -22px;
+      bottom: -35px;
+      width: 95px;
+      height: 95px;
+      border-radius: 50%;
+      background: var(--stat-tint, #eaf2ff);
+      opacity: .75;
+    }
+
+    .stat-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .stat-icon {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      background: var(--stat-tint, #eaf2ff);
+      font-size: 21px;
+    }
+
+    .stat-value {
+      margin-top: 12px;
+      font-size: 29px;
+      font-weight: bold;
+      line-height: 1.3;
+    }
+
+    .stat-note {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .dashboard-grid {
+      grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr);
+      align-items: start;
+    }
+
+    .panel {
+      min-width: 0;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: white;
+      box-shadow: var(--shadow);
+    }
+
+    .panel + .panel {
+      margin-top: 18px;
+    }
+
+    .panel-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .panel-heading h3 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .panel-heading p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .quick-action {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: white;
+      text-align: right;
+      transition: border-color .2s, background .2s;
+    }
+
+    .quick-action:hover {
+      border-color: #93b4f7;
+      background: #f8fbff;
+    }
+
+    .quick-action-icon {
+      display: grid;
+      place-items: center;
+      width: 43px;
+      height: 43px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      background: var(--blue-soft);
+      font-size: 21px;
+    }
+
+    .quick-action strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .quick-action small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .notice {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 15px;
+      border: 1px solid #bfdbfe;
+      border-radius: 13px;
+      background: #eff6ff;
+      color: #1e40af;
+    }
+
+    .notice strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .notice p {
+      margin: 0;
+      font-size: 12px;
+    }
+
+    .activity-list {
+      display: grid;
+      gap: 0;
+    }
+
+    .activity-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .activity-item:last-child {
+      border-bottom: 0;
+    }
+
+    .activity-icon {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      border-radius: 11px;
+      background: #f1f5f9;
+    }
+
+    .activity-item strong {
+      display: block;
+      font-size: 12px;
+    }
+
+    .activity-item p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .empty-state {
+      padding: 28px 15px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .empty-state .empty-icon {
+      margin-bottom: 8px;
+      font-size: 30px;
+    }
+
+    @media (max-width: 1100px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .app-shell {
+        display: block;
+      }
+
+      .sidebar {
+        position: fixed;
+        z-index: 50;
+        top: 0;
+        right: 0;
+        width: 270px;
+        max-width: 85vw;
+        transform: translateX(105%);
+        transition: transform .25s ease;
+        box-shadow: -10px 0 35px rgba(0,0,0,.15);
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .sidebar-backdrop {
+        display: none;
+        position: fixed;
+        z-index: 40;
+        inset: 0;
+        background: rgba(15,23,42,.45);
+      }
+
+      .sidebar-backdrop.show {
+        display: block;
+      }
+
+      .menu-toggle {
+        display: inline-block;
+      }
+
+      .topbar {
+        padding: 13px 15px;
+      }
+
+      .topbar-title h2 {
+        font-size: 15px;
+      }
+
+      .topbar-title p,
+      .status-pill {
+        display: none;
+      }
+
+      .content {
+        padding: 18px 14px;
+      }
+
+      .page-heading h2 {
+        font-size: 20px;
+      }
+
+      .stats-grid {
+        gap: 12px;
+      }
+
+      .stat-card {
+        padding: 15px;
+      }
+
+      .stat-value {
+        font-size: 25px;
+      }
+
+      .panel {
+        padding: 16px;
+      }
+
+      .quick-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar-actions {
+        gap: 6px;
+      }
+
+      .avatar {
+        width: 34px;
+        height: 34px;
+      }
+    }
   </style>
 </head>
+
 <body>
-<header>
-  <h1>بوابة أهالي مخيم أبو عريبان</h1>
-  <p>خدمات الأسرة وتقديم الطلبات والشكاوى</p>
-</header>
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
-<main>
-  <section class="card" id="loginCard">
-    <h2>الدخول إلى ملف الأسرة</h2>
-    <p class="muted">أدخل رقم هوية رب الأسرة للتحقق من بياناتك.</p>
-    <div class="notice">
-      هذه نسخة تجريبية ببيانات وهمية. لا تدخل أرقام هويات حقيقية في هذه المرحلة.
-    </div>
-    <label for="nationalId">رقم هوية رب الأسرة التجريبي</label>
-    <input id="nationalId" inputmode="numeric" placeholder="اكتب 123456789">
-    <button class="primary" id="startBtn">متابعة التحقق</button>
-    <p class="muted">للتجربة فقط استخدم رقم الهوية: 123456789</p>
-    <div id="challengeBox" class="hidden">
-      <label for="answer">سؤال التحقق: ما سنة ميلاد رب الأسرة التجريبي؟</label>
-      <input id="answer" inputmode="numeric" placeholder="سنة الميلاد">
-      <button class="primary" id="verifyBtn">التحقق وعرض الملف</button>
-    </div>
-    <p id="loginMessage" role="status"></p>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">⌂</div>
+        <div>
+          <h1>مخيم أبو عريبان</h1>
+          <p>بوابة خدمات العائلات</p>
+        </div>
+      </div>
+
+      <div class="nav-label">القائمة الرئيسية</div>
+
+      <nav class="nav-menu" aria-label="القائمة الرئيسية">
+        <button class="nav-item active" data-page="dashboard">
+          <span class="nav-icon">▦</span>
+          <span>لوحة التحكم</span>
+        </button>
+
+        <button class="nav-item" data-page="family">
+          <span class="nav-icon">♙</span>
+          <span>بيانات العائلة</span>
+        </button>
+
+        <button class="nav-item" data-page="services">
+          <span class="nav-icon">▤</span>
+          <span>الخدمات والطلبات</span>
+        </button>
+
+        <button class="nav-item" data-page="requests">
+          <span class="nav-icon">◷</span>
+          <span>متابعة الطلبات</span>
+        </button>
+      </nav>
+
+      <div class="nav-label">التواصل والمساعدة</div>
+
+      <nav class="nav-menu" aria-label="التواصل والمساعدة">
+        <button class="nav-item" data-page="complaints">
+          <span class="nav-icon">✉</span>
+          <span>الشكاوى والمقترحات</span>
+        </button>
+
+        <button class="nav-item" data-page="about">
+          <span class="nav-icon">ⓘ</span>
+          <span>عن البوابة</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <strong>إدارة مخيم أبو عريبان</strong>
+        <p>بوابة إلكترونية لخدمة العائلات</p>
+        <span>نسخة أولية للواجهة</span>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="topbar-title">
+          <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة">
+            ☰
+          </button>
+          <div>
+            <h2 id="topbarPageTitle">لوحة التحكم</h2>
+            <p>بوابة عائلات مخيم أبو عريبان</p>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <span class="status-pill">
+            <span class="status-dot"></span>
+            واجهة تجريبية
+          </span>
+          <div class="avatar" title="حساب المستخدم">ع</div>
+        </div>
+      </header>
+
+      <div class="content">
+        
+        <!-- لوحة التحكم -->
+        <section class="page active" id="page-dashboard">
+          <div class="page-heading">
+            <div>
+              <h2>أهلًا وسهلًا بكم</h2>
+              <p>بوابة خدمات عائلات مخيم أبو عريبان الإلكترونية.</p>
+            </div>
+            <button class="btn btn-primary" data-go="services">
+              ＋ تقديم طلب جديد
+            </button>
+          </div>
+
+          <div class="notice" style="margin-bottom:22px">
+            <div style="font-size:22px">ⓘ</div>
+            <div>
+              <strong>تنبيه بخصوص النسخة الحالية</strong>
+              <p>
+                هذه واجهة تجريبية قيد التطوير. لا تُدخل بيانات هوية أو معلومات
+                عائلية حقيقية؛ لم يتم ربط النظام بقاعدة بيانات أو تسجيل دخول آمن.
+              </p>
+            </div>
+          </div>
+
+          <div class="grid stats-grid">
+            <article class="stat-card" style="--stat-tint:#eaf2ff">
+              <div class="stat-top">
+                <span class="stat-label">إجمالي العائلات</span>
+                <span class="stat-icon">♙</span>
+              </div>
+              <div class="stat-value">—</div>
+              <div class="stat-note">تحتاج إلى ربط قاعدة البيانات</div>
+            </article>
+
+            <article class="stat-card" style="--stat-tint:#e8f8ef">
+              <div class="stat-top">
+                <span class="stat-label">الطلبات المقدمة</span>
+                <span class="stat-icon">▤</span>
+              </div>
+              <div class="stat-value" id="statRequests">0</div>
+              <div class="stat-note">طلبات هذه الجلسة التجريبية</div>
+            </article>
+
+            <article class="stat-card" style="--stat-tint:#fff3df">
+              <div class="stat-top">
+                <span class="stat-label">الطلبات قيد المتابعة</span>
+                <span class="stat-icon">◷</span>
+              </div>
+              <div class="stat-value" id="statPending">0</div>
+              <div class="stat-note">لم يتم ربطها بالإدارة</div>
+            </article>
+
+            <article class="stat-card" style="--stat-tint:#f2eaff">
+              <div class="stat-top">
+                <span class="stat-label">الخدمات الإلكترونية</span>
+                <span class="stat-icon">▦</span>
+              </div>
+              <div class="stat-value">5</div>
+              <div class="stat-note">خدمات متاحة للتجربة</div>
+            </article>
+          </div>
+
+          <div class="grid dashboard-grid">
+            <div>
+              <section class="panel">
+                <div class="panel-heading">
+                  <div>
+                    <h3>الخدمات السريعة</h3>
+                    <p>اختر الخدمة التي تريد الوصول إليها.</p>
+                  </div>
+                </div>
+
+                <div class="quick-actions">
+                  <button class="quick-action" data-go="family">
+                    <span class="quick-action-icon">♙</span>
+                    <span>
+                      <strong>بيانات العائلة</strong>
+                      <small>الاطلاع على بيانات الأسرة</small>
+                    </span>
+                  </button>
+
+                  <button class="quick-action" data-go="services">
+                    <span class="quick-action-icon">＋</span>
+                    <span>
+                      <strong>طلب مساعدة</strong>
+                      <small>تقديم طلب خدمة جديد</small>
+                    </span>
+                  </button>
+
+                  <button class="quick-action" data-go="requests">
+                    <span class="quick-action-icon">◷</span>
+                    <span>
+                      <strong>متابعة الطلبات</strong>
+                      <small>عرض الطلبات التجريبية</small>
+                    </span>
+                  </button>
+
+                  <button class="quick-action" data-go="complaints">
+                    <span class="quick-action-icon">✉</span>
+                    <span>
+                      <strong>شكوى أو اقتراح</strong>
+                      <small>إرسال ملاحظة تجريبية</small>
+                    </span>
+                  </button>
+                </div>
+              </section>
+
+              <section class="panel">
+                <div class="panel-heading">
+                  <div>
+                    <h3>آخر الطلبات</h3>
+                    <p>الطلبات التي أُضيفت في هذه الجلسة.</p>
+                  </div>
+                  <button class="btn btn-secondary btn-small" data-go="requests">
+                    عرض الكل
+                  </button>
+                </div>
+                <div id="dashboardRecent" class="activity-list">
+                  <div class="empty-state">
+                    <div class="empty-icon">▤</div>
+                    <strong>لا توجد طلبات حتى الآن</strong>
+                    <p>ستظهر الطلبات التجريبية هنا بعد تقديمها.</p>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <div>
+              <section class="panel">
+                <div class="panel-heading">
+                  <div>
+                    <h3>عن البوابة</h3>
+                    <p>من مخيم أبو عريبان</p>
+                  </div>
+                </div>
+
+                <p>
+                  تهدف البوابة إلى تسهيل وصول العائلات إلى الخدمات الإلكترونية
+                  وتنظيم الطلبات والاستفسارات بطريقة واضحة.
+                </p>
+
+                <div class="notice">
+                  <span style="font-size:20px">ℹ</span>
+                  <div>
+                    <strong>البيانات غير مرتبطة بالنظام الفعلي</strong>
+                    <p>
+                      الأرقام والطلبات المعروضة في هذه النسخة تجريبية وليست
+                      إحصائيات رسمية للمخيم.
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              <section class="panel">
+                <div class="panel-heading">
+                  <div>
+                    <h3>كيف تستخدم البوابة؟</h3>
+                    <p>خطوات بسيطة للتجربة.</p>
+                  </div>
+                </div>
+
+                <div class="activity-list">
+                  <div class="activity-item">
+                    <span class="activity-icon">١</span>
+                    <div>
+                      <strong>اختر الخدمة</strong>
+                      <p>انتقل إلى الخدمات والطلبات.</p>
+                    </div>
+                  </div>
+
+                  <div class="activity-item">
+                    <span class="activity-icon">٢</span>
+                    <div>
+                      <strong>أكمل النموذج</strong>
+                      <p>استخدم معلومات تجريبية فقط.</p>
+                    </div>
+                  </div>
+
+                  <div class="activity-item">
+                    <span class="activity-icon">٣</span>
+                    <div>
+                      <strong>راجع الطلب</strong>
+                      <p>تابع الطلب داخل الواجهة التجريبية.</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <!-- صفحة بيانات العائلة -->
+        <section class="page" id="page-family">
+          <div class="page-heading">
+            <div>
+              <h2>بيانات العائلة</h2>
+              <p>واجهة مبدئية لعرض بيانات الأسرة بعد الربط بالنظام.</p>
+            </div>
+          </div>
+
+          <section class="panel">
+            <div class="notice">
+              <span style="font-size:22px">🔒</span>
+              <div>
+                <strong>يتطلب عرض البيانات نظام تحقق آمن</strong>
+                <p>
+                  لا توجد حاليًا وسيلة للتحقق من هوية صاحب الطلب أو صلاحية
+                  وصوله إلى بيانات الأسرة. لذلك لن تُعرض سجلات عائلات حقيقية.
+                </p>
+              </div>
+            </div>
+
+            <div style="margin-top:22px">
+              <label class="field-label" for="familyLookup">
+                رقم مرجعي تجريبي
+              </label>
+              <div class="form-row">
+                <input
+                  class="field"
+                  id="familyLookup"
+                  type="text"
+                  placeholder="أدخل رمزًا تجريبيًا فقط"
+                  autocomplete="off"
+                >
+                <button class="btn btn-primary" id="familyLookupButton">
+                  تجربة البحث
+                </button>
+              </div>
+              <p class="field-help">
+                البحث هنا توضيحي فقط ولا يتصل بكشوف العائلات.
+              </p>
+            </div>
+
+            <div id="familyLookupResult" style="margin-top:18px"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-heading">
+              <div>
+                <h3>البيانات التي يمكن عرضها مستقبلًا</h3>
+                <p>تُحدد بعد اعتماد الصلاحيات وآلية حماية البيانات.</p>
+              </div>
+            </div>
+
+            <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(190px,1fr))">
+              <div class="quick-action">
+                <span class="quick-action-icon">♙</span>
+                <span>
+                  <strong>معلومات رب الأسرة</strong>
+                  <small>تُعرض للمستخدم المخوّل فقط</small>
+                </span>
+              </div>
+
+              <div class="quick-action">
+                <span class="quick-action-icon">⌂</span>
+                <span>
+                  <strong>بيانات أفراد الأسرة</strong>
+                  <small>وفق صلاحيات الوصول المعتمدة</small>
+                </span>
+              </div>
+
+              <div class="quick-action">
+                <span class="quick-action-icon">▤</span>
+                <span>
+                  <strong>سجل الخدمات</strong>
+                  <small>بعد ربط النظام بالبيانات الفعلية</small>
+                </span>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <!-- صفحة الخدمات والطلبات -->
+        <section class="page" id="page-services">
+          <div class="page-heading">
+            <div>
+              <h2>الخدمات والطلبات</h2>
+              <p>اختر نوع الطلب وأكمل النموذج التجريبي.</p>
+            </div>
+          </div>
+
+          <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin-bottom:20px">
+            <button class="quick-action" data-service="طلب مساعدة">
+              <span class="quick-action-icon">📦</span>
+              <span>
+                <strong>طلب مساعدة</strong>
+                <small>تسجيل طلب مساعدة تجريبي</small>
+              </span>
+            </button>
+
+            <button class="quick-action" data-service="تحديث بيانات">
+              <span class="quick-action-icon">✎</span>
+              <span>
+                <strong>تحديث بيانات</strong>
+                <small>طلب تصحيح بيانات الأسرة</small>
+              </span>
+            </button>
+
+            <button class="quick-action" data-service="استفسار">
+              <span class="quick-action-icon">؟</span>
+              <span>
+                <strong>استفسار</strong>
+                <small>إرسال استفسار تجريبي</small>
+              </span>
+            </button>
+
+            <button class="quick-action" data-service="شكوى">
+              <span class="quick-action-icon">✉</span>
+              <span>
+                <strong>شكوى</strong>
+                <small>تسجيل شكوى تجريبية</small>
+              </span>
+            </button>
+
+            <button class="quick-action" data-service="اقتراح">
+              <span class="quick-action-icon">✦</span>
+              <span>
+                <strong>اقتراح</strong>
+                <small>إرسال اقتراح لتحسين الخدمات</small>
+              </span>
+            </button>
+          </div>
+
+          <section class="panel">
+            <div class="panel-heading">
+              <div>
+                <h3>نموذج تقديم الطلب</h3>
+                <p>جميع الطلبات في هذه النسخة محلية وتجريبية.</p>
+              </div>
+            </div>
+
+            <form id="requestForm">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="field-label" for="requestType">
+                    نوع الطلب <span class="required">*</span>
+                  </label>
+                  <select class="field" id="requestType" required>
+                    <option value="">اختر نوع الطلب</option>
+                    <option>طلب مساعدة</option>
+                    <option>تحديث بيانات</option>
+                    <option>استفسار</option>
+                    <option>شكوى</option>
+                    <option>اقتراح</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="field-label" for="requestPriority">
+                    درجة الأهمية
+                  </label>
+                  <select class="field" id="requestPriority">
+                    <option value="عادي">عادي</option>
+                    <option value="مهم">مهم</option>
+                    <option value="عاجل">عاجل</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="field-label" for="requestReference">
+                    رمز مرجعي تجريبي
+                  </label>
+                  <input
+                    class="field"
+                    id="requestReference"
+                    type="text"
+                    maxlength="40"
+                    placeholder="اختياري — لا تدخل رقم الهوية"
+                    autocomplete="off"
+                  >
+                </div>
+
+                <div class="form-group">
+                  <label class="field-label" for="requestContact">
+                    وسيلة تواصل تجريبية
+                  </label>
+                  <input
+                    class="field"
+                    id="requestContact"
+                    type="text"
+                    maxlength="60"
+                    placeholder="لا تدخل رقم هاتف حقيقي"
+                    autocomplete="off"
+                  >
+                </div>
+
+                <div class="form-group full-width">
+                  <label class="field-label" for="requestSubject">
+                    عنوان الطلب <span class="required">*</span>
+                  </label>
+                  <input
+                    class="field"
+                    id="requestSubject"
+                    type="text"
+                    maxlength="100"
+                    required
+                    placeholder="اكتب عنوانًا مختصرًا"
+                  >
+                </div>
+
+                <div class="form-group full-width">
+                  <label class="field-label" for="requestDetails">
+                    تفاصيل الطلب <span class="required">*</span>
+                  </label>
+                  <textarea
+                    class="field"
+                    id="requestDetails"
+                    rows="5"
+                    maxlength="1500"
+                    required
+                    placeholder="اكتب تفاصيل تجريبية دون معلومات شخصية حقيقية"
+                  ></textarea>
+                  <div class="field-help">الحد الأقصى 1500 حرف.</div>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                  تسجيل الطلب التجريبي
+                </button>
+                <button type="reset" class="btn btn-secondary">
+                  مسح الحقول
+                </button>
+              </div>
+
+              <div id="requestFormMessage" aria-live="polite"></div>
+            </form>
+          </section>
   </section>
+ 
+        <!-- صفحة متابعة الطلبات -->
+        <section class="page" id="page-requests">
+          <div class="page-heading">
+            <div>
+              <h2>متابعة الطلبات</h2>
+              <p>عرض الطلبات التي سجلتها في هذه الجلسة التجريبية.</p>
+            </div>
+            <button class="btn btn-secondary" id="refreshRequests">
+              ↻ تحديث العرض
+            </button>
+          </div>
 
-  <section class="card hidden" id="familyCard">
-    <h2>ملف الأسرة</h2>
-    <p><strong>رب الأسرة:</strong> أحمد محمد — بيانات تجريبية</p>
-    <p><strong>عدد أفراد الأسرة:</strong> 5</p>
-    <p><strong>حالة الملف:</strong> <span class="tag">عرض تجريبي</span></p>
-    <p class="muted">هذه البيانات غير حقيقية ولا تأتي من سجلات إدارة المخيم.</p>
-    <button class="secondary" id="logoutBtn">تسجيل الخروج</button>
-  </section>
+          <section class="panel">
+            <div class="filters">
+              <div class="filter-search">
+                <label class="field-label" for="requestSearch">بحث</label>
+                <input
+                  class="field"
+                  id="requestSearch"
+                  type="search"
+                  placeholder="ابحث في العنوان أو الرقم المرجعي"
+                >
+              </div>
 
-  <section class="card hidden" id="requestCard">
-    <h2>تقديم طلب أو شكوى</h2>
-    <label for="requestType">نوع الطلب</label>
-    <select id="requestType">
-      <option value="شكوى">شكوى</option>
-      <option value="طلب مساعدة">طلب مساعدة</option>
-      <option value="استفسار">استفسار</option>
-      <option value="تصحيح بيانات">طلب تصحيح بيانات</option>
-      <option value="اقتراح">اقتراح</option>
-    </select>
-    <label for="requestDetails">تفاصيل الطلب</label>
-    <textarea id="requestDetails" rows="4" maxlength="1500"
-      placeholder="اكتب تفاصيل طلبك هنا"></textarea>
-    <button class="primary" id="submitBtn">إرسال الطلب التجريبي</button>
-    <p id="requestMessage" role="status"></p>
-  </section>
+              <div class="filter-select">
+                <label class="field-label" for="requestStatusFilter">الحالة</label>
+                <select class="field" id="requestStatusFilter">
+                  <option value="">جميع الحالات</option>
+                  <option value="قيد المراجعة">قيد المراجعة</option>
+                </select>
+              </div>
 
-  <section class="card hidden" id="requestsCard">
-    <h2>طلباتي التجريبية</h2>
-    <p class="muted">الطلبات هنا محفوظة على هذا المتصفح فقط، ولا تصل إلى إدارة المخيم.</p>
-    <div id="requestsList"></div>
-  </section>
-</main>
+              <div class="filter-select">
+                <label class="field-label" for="requestTypeFilter">نوع الطلب</label>
+                <select class="field" id="requestTypeFilter">
+                  <option value="">جميع الأنواع</option>
+                  <option>طلب مساعدة</option>
+                  <option>تحديث بيانات</option>
+                  <option>استفسار</option>
+                  <option>شكوى</option>
+                  <option>اقتراح</option>
+                </select>
+              </div>
+            </div>
 
-<footer>إدارة مخيم أبو عريبان</footer>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>رقم الطلب</th>
+                    <th>نوع الطلب</th>
+                    <th>العنوان</th>
+                    <th>تاريخ الإنشاء</th>
+                    <th>الحالة</th>
+                    <th>التفاصيل</th>
+                  </tr>
+                </thead>
+                <tbody id="requestsTableBody">
+                  <tr>
+                    <td colspan="6">
+                      <div class="empty-state">
+                        لا توجد طلبات مسجلة في هذه الجلسة.
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
-<script>
-  const $ = id => document.getElementById(id);
-  const demoId = "123456789";
-  const demoYear = "1985";
-  let loggedIn = false;
+            <div id="requestsCount" class="field-help"></div>
+          </section>
 
-  $("startBtn").addEventListener("click", () => {
-    $("challengeBox").classList.add("hidden");
-    $("loginMessage").textContent = "";
-    if ($("nationalId").value.trim() !== demoId) {
-      $("loginMessage").textContent = "بيانات التجربة غير صحيحة. استخدم رقم الهوية التجريبي الظاهر أعلاه.";
-      return;
+          <section class="panel">
+            <div class="panel-heading">
+              <div>
+                <h3>ملاحظات حول حالة الطلب</h3>
+                <p>الحالات المعروضة توضيحية وليست تحديثات من إدارة المخيم.</p>
+              </div>
+            </div>
+
+            <div class="activity-list">
+              <div class="activity-item">
+                <span class="activity-icon">◷</span>
+                <div>
+                  <strong>قيد المراجعة</strong>
+                  <p>تم تسجيل الطلب داخل الواجهة التجريبية فقط.</p>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <span class="activity-icon">🔒</span>
+                <div>
+                  <strong>لا يوجد اتصال بالإدارة</strong>
+                  <p>لا يمكن اعتبار تسجيل الطلب إرسالًا رسميًا للمخيم.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <!-- صفحة الشكاوى والمقترحات -->
+        <section class="page" id="page-complaints">
+          <div class="page-heading">
+            <div>
+              <h2>الشكاوى والمقترحات</h2>
+              <p>ساهم بملاحظاتك لتطوير الخدمات المقدمة للعائلات.</p>
+            </div>
+          </div>
+
+          <section class="panel">
+            <div class="panel-heading">
+              <div>
+                <h3>نموذج الملاحظات</h3>
+                <p>يمكنك تجربة إرسال شكوى أو اقتراح دون معلومات شخصية.</p>
+              </div>
+            </div>
+
+            <form id="feedbackForm">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="field-label" for="feedbackType">
+                    نوع الملاحظة <span class="required">*</span>
+                  </label>
+                  <select class="field" id="feedbackType" required>
+                    <option value="">اختر النوع</option>
+                    <option value="شكوى">شكوى</option>
+                    <option value="اقتراح">اقتراح</option>
+                    <option value="ملاحظة عامة">ملاحظة عامة</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="field-label" for="feedbackSubject">
+                    عنوان الملاحظة <span class="required">*</span>
+                  </label>
+                  <input
+                    class="field"
+                    id="feedbackSubject"
+                    type="text"
+                    maxlength="100"
+                    required
+                    placeholder="عنوان مختصر"
+                  >
+                </div>
+
+                <div class="form-group full-width">
+                  <label class="field-label" for="feedbackDetails">
+                    نص الملاحظة <span class="required">*</span>
+                  </label>
+                  <textarea
+                    class="field"
+                    id="feedbackDetails"
+                    rows="6"
+                    maxlength="1500"
+                    required
+                    placeholder="اكتب ملاحظتك التجريبية"
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit">
+                  تسجيل الملاحظة التجريبية
+                </button>
+                <button class="btn btn-secondary" type="reset">
+                  مسح الحقول
+                </button>
+              </div>
+
+              <div id="feedbackMessage" aria-live="polite"></div>
+            </form>
+          </section>
+
+          <section class="panel">
+            <div class="notice">
+              <span style="font-size:22px">ℹ</span>
+              <div>
+                <strong>تنبيه مهم</strong>
+                <p>
+                  إرسال النموذج حاليًا لا يوصل الشكوى أو الاقتراح إلى إدارة
+                  المخيم. يلزم ربطه بخادم وقاعدة بيانات وآلية متابعة آمنة.
+                </p>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <!-- صفحة عن البوابة -->
+        <section class="page" id="page-about">
+          <div class="page-heading">
+            <div>
+              <h2>عن البوابة</h2>
+              <p>بوابة خدمات عائلات مخيم أبو عريبان.</p>
+            </div>
+          </div>
+
+          <section class="panel">
+            <h3 style="margin-top:0">الرؤية والهدف</h3>
+            <p>
+              تهدف البوابة إلى تنظيم الخدمات الإلكترونية وتسهيل تقديم الطلبات
+              والاستفسارات، وتوفير واجهة واضحة يمكن تطويرها مستقبلًا لتتكامل
+              مع أنظمة إدارة المخيم.
+            </p>
+
+            <div class="divider-line"></div>
+
+            <h3>الخصائص الحالية</h3>
+            <ul class="feature-list">
+              <li>واجهة عربية تدعم اتجاه الكتابة من اليمين إلى اليسار.</li>
+              <li>تصميم متجاوب مع الهواتف والأجهزة اللوحية والحواسيب.</li>
+              <li>نماذج تجريبية للخدمات والشكاوى والمقترحات.</li>
+              <li>عرض وبحث في الطلبات المسجلة خلال الجلسة.</li>
+              <li>قائمة جانبية للتنقل بين صفحات الواجهة.</li>
+            </ul>
+
+            <div class="divider-line"></div>
+
+            <h3>ما الذي يحتاج إلى تطوير لاحقًا؟</h3>
+            <ul class="feature-list">
+              <li>تسجيل دخول آمن والتحقق من هوية المستخدم.</li>
+              <li>ربط قاعدة بيانات فعلية بصلاحيات وصول محددة.</li>
+              <li>ربط الطلبات بإدارة المخيم وإظهار حالات المعالجة الحقيقية.</li>
+              <li>تسجيل عمليات الوصول والتعديل وحماية المعلومات الحساسة.</li>
+              <li>نسخ احتياطي وإجراءات استعادة البيانات.</li>
+            </ul>
+          </section>
+
+          <section class="panel">
+            <div class="notice">
+              <span style="font-size:22px">🔐</span>
+              <div>
+                <strong>الخصوصية وحماية البيانات</strong>
+                <p>
+                  هذه النسخة ليست نظامًا معتمدًا لحفظ بيانات المستفيدين.
+                  لا تستخدمها لتسجيل أرقام الهوية أو العناوين أو أرقام الهواتف
+                  الحقيقية قبل تنفيذ الحماية والربط المناسبين.
+                </p>
+              </div>
+            </div>
+          </section>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <style>
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
     }
-    $("challengeBox").classList.remove("hidden");
-  });
 
-  $("verifyBtn").addEventListener("click", () => {
-    if ($("answer").value.trim() !== demoYear) {
-      $("loginMessage").textContent = "إجابة غير صحيحة. جرّب سنة الميلاد التجريبية 1985.";
-      return;
+    .form-group {
+      min-width: 0;
     }
-    loggedIn = true;
-    $("loginCard").classList.add("hidden");
-    ["familyCard","requestCard","requestsCard"].forEach(id =>
-      $(id).classList.remove("hidden")
-    );
-    renderRequests();
-  });
 
-  $("logoutBtn").addEventListener("click", () => {
-    loggedIn = false;
-    ["familyCard","requestCard","requestsCard"].forEach(id =>
-      $(id).classList.add("hidden")
-    );
-    $("loginCard").classList.remove("hidden");
-    $("nationalId").value = "";
-    $("answer").value = "";
-    $("challengeBox").classList.add("hidden");
-    $("loginMessage").textContent = "";
-  });
-
-  function readRequests() {
-    try { return JSON.parse(localStorage.getItem("abuDemoRequests") || "[]"); }
-    catch { return []; }
-  }
-
-  $("submitBtn").addEventListener("click", () => {
-    if (!loggedIn) return;
-    const details = $("requestDetails").value.trim();
-    if (details.length < 5) {
-      $("requestMessage").textContent = "اكتب تفاصيل أكثر قبل الإرسال.";
-      return;
+    .full-width {
+      grid-column: 1 / -1;
     }
-    const requests = readRequests();
-    requests.unshift({
-      type: $("requestType").value,
-      details,
-      status: "بانتظار المراجعة (تجريبي)",
-      date: new Date().toLocaleString("ar")
-    });
-    localStorage.setItem("abuDemoRequests", JSON.stringify(requests));
-    $("requestDetails").value = "";
-    $("requestMessage").textContent = "تم حفظ الطلب التجريبي على هذا المتصفح فقط.";
-    renderRequests();
-  });
 
-  function renderRequests() {
-    const list = $("requestsList");
-    list.replaceChildren();
-    const requests = readRequests();
-    if (!requests.length) {
-      list.textContent = "لا توجد طلبات تجريبية حتى الآن.";
-      return;
+    .field-label {
+      display: block;
+      margin-bottom: 7px;
+      color: #334155;
+      font-size: 12px;
+      font-weight: bold;
     }
-    requests.forEach(request => {
-      const item = document.createElement("div");
-      item.className = "item";
-      const title = document.createElement("strong");
-      title.textContent = request.type;
-      const details = document.createElement("p");
-      details.textContent = request.details;
-      const status = document.createElement("span");
-      status.className = "tag";
-      status.textContent = request.status;
-      const date = document.createElement("p");
-      date.className = "muted";
-      date.textContent = request.date;
-      item.append(title, details, status, date);
-      list.append(item);
-    });
-  }
-</script>
-</body>
-  </html>
+
+    .required {
+      color: var(--red);
+    }
+
+    .field {
+      display: block;
+      width: 100%;
+      min-height: 43px;
+      padding: 10px 12px;
+      border: 1px solid #d7e0ea;
+      border-radius: 10px;
+      background: #fff;
+      color: var(--text);
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .field:focus {
+      border-color: #60a5fa;
+      box-shadow: 0 0 0 3px rgba(37,99,235,.09);
+      outline: none;
+    }
+
+    textarea.field {
+      resize: vertical;
+      min-height: 115px;
+    }
+
+    .field-help {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .form-row .field {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: minmax(180px, 1.5fr) repeat(2, minmax(150px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .filter-search,
+    .filter-select {
+      min-width: 0;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    th,
+    td {
+      padding: 13px 15px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    th {
+      background: #f8fafc;
+      color: #475569;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    td {
+      font-size: 12px;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    tbody tr:hover {
+      background: #fafcff;
+    }
+
+    .request-id {
+      color: var(--blue);
+      font-weight: bold;
+    }
+
+    .badge-status {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 999px;
+      color: #92400e;
+      background: #fef3c7;
+      font-size: 10px;
+      font-weight: bold;
+    }
+
+    .badge-type {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 8px;
+      background: #eef2ff;
+      color: #4338ca;
+      font-size: 10px;
+    }
+
+    .divider-line {
+      height: 1px;
+      margin: 22px 0;
+      background: var(--border);
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 10px;
+      padding-right: 22px;
+      color: #475569;
+    }
+
+    .feature-list li::marker {
+      color: var(--blue);
+    }
+
+    .message {
+      margin-top: 15px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 12px;
+    }
+
+    .message-success {
+      color: #166534;
+      background: #dcfce7;
+      border: 1px solid #bbf7d0;
+    }
+
+    .message-error {
+      color: #991b1b;
+      background: #fee2e2;
+      border: 1px solid #fecaca;
+    }
+
+    .message-info {
+      color: #1e40af;
+      background: #dbeafe;
+      border: 1px solid #bfdbfe;
+    }
+
+    .detail-cell {
+      white-space: normal;
+      min-width: 180px;
+      max-width: 280px;
+    }
+
+    @media (max-width: 760px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full-width {
+        grid-column: auto;
+      }
+
+      .filters {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        flex-direction: column;
+      }
+
+      .form-actions .btn {
+        flex: 1;
+      }
+
+      th,
+      td {
+        padding: 11px;
+      }
+    }
+                </style>
   
+  <script>
+    "use strict";
+
+    // عناصر الواجهة
+    const sidebar = document.getElementById("sidebar");
+    const sidebarBackdrop = document.getElementById("sidebarBackdrop");
+    const menuToggle = document.getElementById("menuToggle");
+    const topbarPageTitle = document.getElementById("topbarPageTitle");
+
+    const pageTitles = {
+      dashboard: "لوحة التحكم",
+      family: "بيانات العائلة",
+      services: "الخدمات والطلبات",
+      requests: "متابعة الطلبات",
+      complaints: "الشكاوى والمقترحات",
+      about: "عن البوابة"
+    };
+
+    // التنقل بين الصفحات
+    function showPage(pageName) {
+      const target = document.getElementById("page-" + pageName);
+
+      if (!target) return;
+
+      document.querySelectorAll(".page").forEach(function (page) {
+        page.classList.remove("active");
+      });
+
+      target.classList.add("active");
+
+      document.querySelectorAll(".nav-item").forEach(function (item) {
+        item.classList.toggle(
+          "active",
+          item.dataset.page === pageName
+        );
+      });
+
+      topbarPageTitle.textContent = pageTitles[pageName] || "بوابة العائلات";
+
+      sidebar.classList.remove("open");
+      sidebarBackdrop.classList.remove("show");
+
+      if (pageName === "requests") {
+        renderRequests();
+      }
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    document.querySelectorAll("[data-page]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        showPage(button.dataset.page);
+      });
+    });
+
+    document.querySelectorAll("[data-go]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        showPage(button.dataset.go);
+      });
+    });
+
+    menuToggle.addEventListener("click", function () {
+      sidebar.classList.toggle("open");
+      sidebarBackdrop.classList.toggle("show");
+    });
+
+    sidebarBackdrop.addEventListener("click", function () {
+      sidebar.classList.remove("open");
+      sidebarBackdrop.classList.remove("show");
+    });
+
+    // اختيار نوع الخدمة من البطاقات
+    document.querySelectorAll("[data-service]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        document.getElementById("requestType").value = button.dataset.service;
+        showPage("services");
+      });
+    });
+
+    // تخزين الطلبات في الذاكرة فقط
+    // لا يوجد إرسال إلى خادم أو قاعدة بيانات
+    let demoRequests = [];
+    let nextRequestNumber = 1;
+
+    function escapeHTML(value) {
+      return String(value == null ? "" : value).replace(
+        /[&<>"']/g,
+        function (character) {
+          const entities = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+          };
+
+          return entities[character];
+        }
+      );
+    }
+
+    function showMessage(elementId, message, type) {
+      const element = document.getElementById(elementId);
+
+      element.innerHTML =
+        '<div class="message message-' + type + '">' +
+        escapeHTML(message) +
+        "</div>";
+    }
+
+    function formatDate(dateValue) {
+      const date = new Date(dateValue);
+
+      return date.toLocaleString("ar", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+    }
+
+    function addDemoRequest(data) {
+      const request = {
+        id: "DEMO-" + String(nextRequestNumber++).padStart(4, "0"),
+        type: data.type,
+        priority: data.priority || "عادي",
+        reference: data.reference || "",
+        contact: data.contact || "",
+        subject: data.subject,
+        details: data.details,
+        status: "قيد المراجعة",
+        createdAt: new Date().toISOString()
+      };
+
+      demoRequests.unshift(request);
+
+      updateDashboardStats();
+      renderRequests();
+
+      return request;
+    }
+
+    // نموذج تقديم الطلب
+    document.getElementById("requestForm").addEventListener(
+      "submit",
+      function (event) {
+        event.preventDefault();
+
+        const type = document.getElementById("requestType").value;
+        const priority = document.getElementById("requestPriority").value;
+        const reference = document.getElementById("requestReference").value.trim();
+        const contact = document.getElementById("requestContact").value.trim();
+        const subject = document.getElementById("requestSubject").value.trim();
+        const details = document.getElementById("requestDetails").value.trim();
+
+        if (!type || !subject || !details) {
+          showMessage(
+            "requestFormMessage",
+            "يرجى تعبئة الحقول المطلوبة.",
+            "error"
+          );
+          return;
+        }
+
+        if (subject.length < 3 || details.length < 5) {
+          showMessage(
+            "requestFormMessage",
+            "يرجى كتابة عنوان وتفاصيل أوضح للطلب التجريبي.",
+            "error"
+          );
+          return;
+        }
+
+        const request = addDemoRequest({
+          type: type,
+          priority: priority,
+          reference: reference,
+          contact: contact,
+          subject: subject,
+          details: details
+        });
+
+        document.getElementById("requestForm").reset();
+
+        showMessage(
+          "requestFormMessage",
+          "تم تسجيل الطلب التجريبي برقم " + request.id +
+          ". هذا التسجيل محلي ولا يعني أن الطلب وصل إلى إدارة المخيم.",
+          "success"
+        );
+
+        renderRequests();
+      }
+    );
+
+    // نموذج الشكاوى والمقترحات
+    document.getElementById("feedbackForm").addEventListener(
+      "submit",
+      function (event) {
+        event.preventDefault();
+
+        const type = document.getElementById("feedbackType").value;
+        const subject = document.getElementById("feedbackSubject").value.trim();
+        const details = document.getElementById("feedbackDetails").value.trim();
+
+        if (!type || !subject || !details) {
+          showMessage(
+            "feedbackMessage",
+            "يرجى تعبئة الحقول المطلوبة.",
+            "error"
+          );
+          return;
+        }
+
+        if (subject.length < 3 || details.length < 5) {
+          showMessage(
+            "feedbackMessage",
+            "يرجى كتابة عنوان وتفاصيل أوضح.",
+            "error"
+          );
+          return;
+        }
+
+        const request = addDemoRequest({
+          type: type,
+          priority: "عادي",
+          subject: subject,
+          details: details
+        });
+
+        document.getElementById("feedbackForm").reset();
+
+        showMessage(
+          "feedbackMessage",
+          "تم تسجيل الملاحظة التجريبية برقم " + request.id +
+          ". لم يتم إرسالها إلى الإدارة.",
+          "success"
+        );
+      }
+    );
+
+    // إحصائيات لوحة التحكم
+    function updateDashboardStats() {
+      document.getElementById("statRequests").textContent =
+        String(demoRequests.length);
+
+      document.getElementById("statPending").textContent =
+        String(
+          demoRequests.filter(function (request) {
+            return request.status === "قيد المراجعة";
+          }).length
+        );
+
+      renderDashboardRecent();
+    }
+
+    function renderDashboardRecent() {
+      const container = document.getElementById("dashboardRecent");
+      const recent = demoRequests.slice(0, 4);
+
+      if (recent.length === 0) {
+        container.innerHTML =
+          '<div class="empty-state">' +
+          '<div class="empty-icon">▤</div>' +
+          "<strong>لا توجد طلبات حتى الآن</strong>" +
+          "<p>ستظهر الطلبات التجريبية هنا بعد تقديمها.</p>" +
+          "</div>";
+        return;
+      }
+
+      container.innerHTML = recent.map(function (request) {
+        return (
+          '<div class="activity-item">' +
+            '<span class="activity-icon">▤</span>' +
+            "<div>" +
+              "<strong>" + escapeHTML(request.subject) + "</strong>" +
+              "<p>" +
+                escapeHTML(request.id) + " · " +
+                escapeHTML(request.type) + " · " +
+                escapeHTML(request.status) +
+              "</p>" +
+            "</div>" +
+          "</div>"
+        );
+      }).join("");
+    }
+
+    // جدول الطلبات
+    function renderRequests() {
+      const tbody = document.getElementById("requestsTableBody");
+      const search = document.getElementById("requestSearch").value
+        .trim()
+        .toLowerCase();
+
+      const status = document.getElementById("requestStatusFilter").value;
+      const type = document.getElementById("requestTypeFilter").value;
+
+      const filtered = demoRequests.filter(function (request) {
+        const searchText = [
+          request.id,
+          request.subject,
+          request.reference,
+          request.type
+        ].join(" ").toLowerCase();
+
+        const matchesSearch = !search || searchText.includes(search);
+        const matchesStatus = !status || request.status === status;
+        const matchesType = !type || request.type === type;
+
+        return matchesSearch && matchesStatus && matchesType;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML =
+          '<tr><td colspan="6">' +
+          '<div class="empty-state">' +
+          (demoRequests.length
+            ? "لا توجد نتائج مطابقة لخيارات البحث."
+            : "لا توجد طلبات مسجلة في هذه الجلسة.") +
+          "</div></td></tr>";
+      } else {
+        tbody.innerHTML = filtered.map(function (request) {
+          return (
+            "<tr>" +
+              '<td><span class="request-id">' +
+                escapeHTML(request.id) +
+              "</span></td>" +
+              "<td><span class=\"badge-type\">" +
+                escapeHTML(request.type) +
+              "</span></td>" +
+              "<td>" + escapeHTML(request.subject) + "</td>" +
+              "<td>" + escapeHTML(formatDate(request.createdAt)) + "</td>" +
+              '<td><span class="badge-status">' +
+                escapeHTML(request.status) +
+              "</span></td>" +
+              '<td><button class="btn btn-secondary btn-small" ' +
+                'data-detail="' + escapeHTML(request.id) + '">' +
+                "عرض التفاصيل</button></td>" +
+            "</tr>"
+          );
+        }).join("");
+      }
+
+      document.getElementById("requestsCount").textContent =
+        "عدد النتائج: " + filtered.length +
+        " من أصل " + demoRequests.length + " طلب تجريبي.";
+    }
+
+    document.getElementById("requestsTableBody").addEventListener(
+      "click",
+      function (event) {
+        const button = event.target.closest("[data-detail]");
+
+        if (!button) return;
+
+        const request = demoRequests.find(function (item) {
+          return item.id === button.dataset.detail;
+        });
+
+        if (!request) return;
+
+        const details = [
+          "رقم الطلب: " + request.id,
+          "النوع: " + request.type,
+          "العنوان: " + request.subject,
+          "الأهمية: " + request.priority,
+          "الحالة: " + request.status,
+          "تاريخ التسجيل: " + formatDate(request.createdAt),
+          "",
+          "التفاصيل:",
+          request.details
+        ].join("\n");
+
+        window.alert(details);
+      }
+    );
+
+    document.getElementById("requestSearch").addEventListener(
+      "input",
+      renderRequests
+    );
+
+    document.getElementById("requestStatusFilter").addEventListener(
+      "change",
+      renderRequests
+    );
+
+    document.getElementById("requestTypeFilter").addEventListener(
+      "change",
+      renderRequests
+    );
+
+    document.getElementById("refreshRequests").addEventListener(
+      "click",
+      renderRequests
+    );
+
+    // البحث التجريبي في بيانات العائلة
+    document.getElementById("familyLookupButton").addEventListener(
+      "click",
+      function () {
+        const value = document.getElementById("familyLookup").value.trim();
+        const result = document.getElementById("familyLookupResult");
+
+        if (!value) {
+          result.innerHTML =
+            '<div class="message message-error">' +
+            "أدخل رمزًا تجريبيًا لإظهار رسالة التوضيح." +
+            "</div>";
+          return;
+        }
+
+        result.innerHTML =
+          '<div class="message message-info">' +
+          "هذه واجهة تجريبية فقط. لم يتم البحث في أي سجل عائلي، " +
+          "ولم يتم التحقق من هوية المستخدم." +
+          "</div>";
+      }
+    );
+
+    // إخفاء رسائل النماذج عند إعادة تعيينها
+    document.getElementById("requestForm").addEventListener(
+      "reset",
+      function () {
+        document.getElementById("requestFormMessage").innerHTML = "";
+      }
+    );
+
+    document.getElementById("feedbackForm").addEventListener(
+      "reset",
+      function () {
+        document.getElementById("feedbackMessage").innerHTML = "";
+      }
+    );
+
+    // بدء تشغيل الواجهة
+    updateDashboardStats();
+    renderRequests();
+  </script>
+</body>
+</html>
