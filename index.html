@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123b35">
+  <title>بوابة أهالي مخيم أبو عريبان</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#f3f6f5;color:#20312e;line-height:1.8}
+    header{background:#123b35;color:white;padding:26px 18px;text-align:center}
+    header h1{margin:0;font-size:25px}
+    header p{margin:6px 0 0;color:#d6e8e1}
+    main{max-width:760px;margin:22px auto;padding:0 14px}
+    .card{background:white;border:1px solid #e0e9e5;border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 5px 20px #163c3510}
+    h2{font-size:19px;margin:0 0 12px;color:#174d42}
+    label{display:block;font-weight:bold;margin:12px 0 5px}
+    input,select,textarea{width:100%;padding:12px;border:1px solid #ccd9d4;border-radius:10px;font:inherit;background:white}
+    button{border:0;border-radius:10px;padding:12px 18px;font:inherit;font-weight:bold;cursor:pointer}
+    .primary{background:#176b55;color:white;width:100%;margin-top:16px}
+    .secondary{background:#e8f1ed;color:#174d42}
+    .notice{background:#fff7df;border:1px solid #f0df9e;padding:12px;border-radius:10px;font-size:14px}
+    .hidden{display:none}
+    .muted{color:#687a74;font-size:14px}
+    .item{border:1px solid #e0e9e5;padding:12px;border-radius:10px;margin-top:10px}
+    footer{text-align:center;color:#6e7f79;font-size:13px;padding:20px}
+    .tag{display:inline-block;background:#e4f3eb;color:#176b55;padding:2px 9px;border-radius:20px;font-size:12px}
+  </style>
+</head>
+<body>
+<header>
+  <h1>بوابة أهالي مخيم أبو عريبان</h1>
+  <p>خدمات الأسرة وتقديم الطلبات والشكاوى</p>
+</header>
+
+<main>
+  <section class="card" id="loginCard">
+    <h2>الدخول إلى ملف الأسرة</h2>
+    <p class="muted">أدخل رقم هوية رب الأسرة للتحقق من بياناتك.</p>
+    <div class="notice">
+      هذه نسخة تجريبية ببيانات وهمية. لا تدخل أرقام هويات حقيقية في هذه المرحلة.
+    </div>
+    <label for="nationalId">رقم هوية رب الأسرة التجريبي</label>
+    <input id="nationalId" inputmode="numeric" placeholder="اكتب 123456789">
+    <button class="primary" id="startBtn">متابعة التحقق</button>
+    <p class="muted">للتجربة فقط استخدم رقم الهوية: 123456789</p>
+    <div id="challengeBox" class="hidden">
+      <label for="answer">سؤال التحقق: ما سنة ميلاد رب الأسرة التجريبي؟</label>
+      <input id="answer" inputmode="numeric" placeholder="سنة الميلاد">
+      <button class="primary" id="verifyBtn">التحقق وعرض الملف</button>
+    </div>
+    <p id="loginMessage" role="status"></p>
+  </section>
+
+  <section class="card hidden" id="familyCard">
+    <h2>ملف الأسرة</h2>
+    <p><strong>رب الأسرة:</strong> أحمد محمد — بيانات تجريبية</p>
+    <p><strong>عدد أفراد الأسرة:</strong> 5</p>
+    <p><strong>حالة الملف:</strong> <span class="tag">عرض تجريبي</span></p>
+    <p class="muted">هذه البيانات غير حقيقية ولا تأتي من سجلات إدارة المخيم.</p>
+    <button class="secondary" id="logoutBtn">تسجيل الخروج</button>
+  </section>
+
+  <section class="card hidden" id="requestCard">
+    <h2>تقديم طلب أو شكوى</h2>
+    <label for="requestType">نوع الطلب</label>
+    <select id="requestType">
+      <option value="شكوى">شكوى</option>
+      <option value="طلب مساعدة">طلب مساعدة</option>
+      <option value="استفسار">استفسار</option>
+      <option value="تصحيح بيانات">طلب تصحيح بيانات</option>
+      <option value="اقتراح">اقتراح</option>
+    </select>
+    <label for="requestDetails">تفاصيل الطلب</label>
+    <textarea id="requestDetails" rows="4" maxlength="1500"
+      placeholder="اكتب تفاصيل طلبك هنا"></textarea>
+    <button class="primary" id="submitBtn">إرسال الطلب التجريبي</button>
+    <p id="requestMessage" role="status"></p>
+  </section>
+
+  <section class="card hidden" id="requestsCard">
+    <h2>طلباتي التجريبية</h2>
+    <p class="muted">الطلبات هنا محفوظة على هذا المتصفح فقط، ولا تصل إلى إدارة المخيم.</p>
+    <div id="requestsList"></div>
+  </section>
+</main>
+
+<footer>إدارة مخيم أبو عريبان</footer>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const demoId = "123456789";
+  const demoYear = "1985";
+  let loggedIn = false;
+
+  $("startBtn").addEventListener("click", () => {
+    $("challengeBox").classList.add("hidden");
+    $("loginMessage").textContent = "";
+    if ($("nationalId").value.trim() !== demoId) {
+      $("loginMessage").textContent = "بيانات التجربة غير صحيحة. استخدم رقم الهوية التجريبي الظاهر أعلاه.";
+      return;
+    }
+    $("challengeBox").classList.remove("hidden");
+  });
+
+  $("verifyBtn").addEventListener("click", () => {
+    if ($("answer").value.trim() !== demoYear) {
+      $("loginMessage").textContent = "إجابة غير صحيحة. جرّب سنة الميلاد التجريبية 1985.";
+      return;
+    }
+    loggedIn = true;
+    $("loginCard").classList.add("hidden");
+    ["familyCard","requestCard","requestsCard"].forEach(id =>
+      $(id).classList.remove("hidden")
+    );
+    renderRequests();
+  });
+
+  $("logoutBtn").addEventListener("click", () => {
+    loggedIn = false;
+    ["familyCard","requestCard","requestsCard"].forEach(id =>
+      $(id).classList.add("hidden")
+    );
+    $("loginCard").classList.remove("hidden");
+    $("nationalId").value = "";
+    $("answer").value = "";
+    $("challengeBox").classList.add("hidden");
+    $("loginMessage").textContent = "";
+  });
+
+  function readRequests() {
+    try { return JSON.parse(localStorage.getItem("abuDemoRequests") || "[]"); }
+    catch { return []; }
+  }
+
+  $("submitBtn").addEventListener("click", () => {
+    if (!loggedIn) return;
+    const details = $("requestDetails").value.trim();
+    if (details.length < 5) {
+      $("requestMessage").textContent = "اكتب تفاصيل أكثر قبل الإرسال.";
+      return;
+    }
+    const requests = readRequests();
+    requests.unshift({
+      type: $("requestType").value,
+      details,
+      status: "بانتظار المراجعة (تجريبي)",
+      date: new Date().toLocaleString("ar")
+    });
+    localStorage.setItem("abuDemoRequests", JSON.stringify(requests));
+    $("requestDetails").value = "";
+    $("requestMessage").textContent = "تم حفظ الطلب التجريبي على هذا المتصفح فقط.";
+    renderRequests();
+  });
+
+  function renderRequests() {
+    const list = $("requestsList");
+    list.replaceChildren();
+    const requests = readRequests();
+    if (!requests.length) {
+      list.textContent = "لا توجد طلبات تجريبية حتى الآن.";
+      return;
+    }
+    requests.forEach(request => {
+      const item = document.createElement("div");
+      item.className = "item";
+      const title = document.createElement("strong");
+      title.textContent = request.type;
+      const details = document.createElement("p");
+      details.textContent = request.details;
+      const status = document.createElement("span");
+      status.className = "tag";
+      status.textContent = request.status;
+      const date = document.createElement("p");
+      date.className = "muted";
+      date.textContent = request.date;
+      item.append(title, details, status, date);
+      list.append(item);
+    });
+  }
+</script>
+</body>
+  </html>
+  
